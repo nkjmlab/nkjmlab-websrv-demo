@@ -8,11 +8,17 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
+import org.glassfish.jersey.server.mvc.Viewable;
 import org.nkjmlab.util.json.JsonUtils;
 import org.nkjmlab.webui.jaxrs.JaxrsView;
 
 @Path("/")
 public class DemoView extends JaxrsView {
+
+	@Override
+	public Viewable getView(String pathInfo, Map<String, String[]> params) {
+		return getDefaultView(pathInfo, params);
+	}
 
 	@GET
 	@Produces({ "application/x-msgpack" })
@@ -32,4 +38,5 @@ public class DemoView extends JaxrsView {
 		result.put(left + "+" + right, left + right);
 		return JsonUtils.encode(result);
 	}
+
 }
